@@ -25,10 +25,7 @@ def cves():
 
     # Filter by CWE
     if request.args.get("cwe"):
-        try:
-            q = q.filter(Cve.cwes.contains([request.args.get("cwe")]))
-        except ValueError:
-            return redirect(url_for("main.cves"))
+        q = q.filter(Cve.cwes.contains([request.args.get("cwe")]))
 
     # Filter by CVSS score
     if request.args.get("cvss") and request.args.get("cvss").lower() in [
